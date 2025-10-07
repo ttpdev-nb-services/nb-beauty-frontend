@@ -11,7 +11,7 @@ export function useCategoryOptions() {
       .filter((c) => c.id !== currentId)
       .map((c) => ({
         label: c.name,
-        value: c.id,
+        value: String(c.id),
       }));
   };
 

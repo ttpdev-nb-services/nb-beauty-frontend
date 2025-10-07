@@ -13,7 +13,7 @@ export type TypographyProps = {
 };
 
 export type OptionItem = {
-  value: string | number;
+  value: string;
   label: string;
 };
 

@@ -97,7 +97,7 @@ class HttpService implements IHttpService {
 }
 
 const httpService = new HttpService({
-  baseURL: getEnv("NEXT_PUBLIC_SERVER_URL"),
+  baseURL: getEnv("NEXT_PUBLIC_API_URL"),
   timeout: 30000,
 });
 
