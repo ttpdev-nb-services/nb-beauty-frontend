@@ -10,7 +10,7 @@ import { QueryProvider } from "@/providers/query-provider";
 import { Header } from "@/components/segments/header";
 import { Footer } from "@/components/segments/footer";
 import { ChildrenProps } from "@/types/default-props";
-
+import { Analytics } from "@vercel/analytics/next";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,6 +37,7 @@ export default function RootLayout({ children }: Readonly<ChildrenProps>) {
           enableSystem
           disableTransitionOnChange
         >
+          <Analytics />
           <Toaster position="top-right" />
           <div className="w-full min-h-svh">
             <QueryProvider>

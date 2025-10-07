@@ -14,12 +14,12 @@ export class CategoryService {
   }
   public async list() {
     return this.httpService.get<CollectionResponse<TCategories>>(
-      BaseApi.categories.base(),
+      BaseApi.categories.base,
     );
   }
   public async create(request: TCreateCategoryRequest) {
     return this.httpService.post<ApiResponse<TCategory>>(
-      BaseApi.categories.base(),
+      BaseApi.categories.base,
       request,
     );
   }

@@ -2,11 +2,10 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { NavHomeItem } from "@/types/segments/app-sidebar";
-import Link from "next/link";
+import { NavLink } from "./nav-link";
 
 export const NavHome = ({ items }: { items: NavHomeItem[] }) => {
   return (
@@ -15,15 +14,7 @@ export const NavHome = ({ items }: { items: NavHomeItem[] }) => {
       <SidebarMenu>
         {items.map((item) => (
           <SidebarMenuItem key={item.url}>
-            <Link
-              className="text-sidebar-foreground/70 font-medium"
-              href={item.url}
-            >
-              <SidebarMenuButton>
-                {item.icon && <item.icon />}
-                {item.title}
-              </SidebarMenuButton>
-            </Link>
+            <NavLink icon={item.icon} title={item.title} href={item.url} />
           </SidebarMenuItem>
         ))}
       </SidebarMenu>

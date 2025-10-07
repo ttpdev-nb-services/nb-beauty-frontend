@@ -18,8 +18,8 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
 import { NavMainItem } from "@/types/segments/app-sidebar";
+import { NavLink } from "./nav-link";
 
 export function NavMain({ items }: { items: NavMainItem[] }) {
   return (
@@ -55,18 +55,15 @@ export function NavMain({ items }: { items: NavMainItem[] }) {
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <Link
-                          className="text-sidebar-foreground/70 font-medium"
-                          href={subItem.url}
-                        >
-                          <span>{subItem.title}</span>
-                        </Link>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
+                  {item.items?.map((subItem) => {
+                    return (
+                      <SidebarMenuSubItem key={subItem.title}>
+                        <SidebarMenuSubButton asChild>
+                          <NavLink href={subItem.url} title={subItem.title} />
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    );
+                  })}
                 </SidebarMenuSub>
               </CollapsibleContent>
             </SidebarMenuItem>

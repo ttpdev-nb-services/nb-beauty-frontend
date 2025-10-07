@@ -1,11 +1,10 @@
-"use client";
-
 import { ColumnDef } from "@tanstack/react-table";
 import { TCategories } from "@/modules/category/types/queries";
 import { TableAction } from "./table-action";
 import Link from "next/link";
 import { BASE_ROUTE } from "@/constants/route";
 import { Switch } from "@/components/ui/switch";
+import { FormatDateTime } from "@/utils/format";
 
 export const Columns: ColumnDef<TCategories, TCategories>[] = [
   {
@@ -65,8 +64,33 @@ export const Columns: ColumnDef<TCategories, TCategories>[] = [
     header: "Trạng thái hiển thị",
     cell: ({ row }) => {
       const isActive = row.original.isActive;
-
       return <Switch checked={isActive} />;
+    },
+  },
+  {
+    accessorKey: "createdAt",
+    id: "createdAt",
+    header: "Thời gian tạo",
+    cell: ({ row }) => {
+      const createdAt = row.original.createdAt;
+      const formatted = FormatDateTime({
+        value: createdAt,
+      });
+
+      return formatted;
+    },
+  },
+  {
+    accessorKey: "updatedAt",
+    id: "updatedAt",
+    header: "Thời gian cập nhật",
+    cell: ({ row }) => {
+      const updatedAt = row.original.updatedAt;
+      const formatted = FormatDateTime({
+        value: updatedAt,
+      });
+
+      return formatted;
     },
   },
   {

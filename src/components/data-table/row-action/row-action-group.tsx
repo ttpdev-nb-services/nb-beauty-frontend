@@ -38,12 +38,13 @@ export function RowActionGroup({ items }: TRowActionGroupProps) {
               </Link>
             ) : (
               <div
+                onClick={item.onClick}
                 className={cn(
                   item.className,
-                  "flex items-center gap-2 px-2 py-1.5",
+                  "flex items-center cursor-pointer gap-2 px-2 py-1.5",
                 )}
               >
-                {item.icon && <item.icon size={16} />}
+                {item.icon && <item.icon className="text-current" size={16} />}
                 {item.label}
               </div>
             )}

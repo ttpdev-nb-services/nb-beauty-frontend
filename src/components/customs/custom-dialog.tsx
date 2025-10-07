@@ -40,23 +40,21 @@ export const CustomDialog = ({
         }}
         className={cn(className)}
       >
+        <DialogHeader hidden={loading}>
+          <DialogTitle className="flex items-center gap-2" hidden={!title}>
+            {Icon}
+            {title}
+          </DialogTitle>
+          <DialogDescription hidden={!description}>
+            {description}
+          </DialogDescription>
+        </DialogHeader>
         {loading ? (
           <div className="flex items-center justify-center w-full min-h-72">
             <Spinner className="size-6 text-destructive" />
           </div>
         ) : (
-          <>
-            <DialogHeader hidden={loading}>
-              <DialogTitle className="flex items-center gap-2" hidden={!title}>
-                {Icon}
-                {title}
-              </DialogTitle>
-              <DialogDescription hidden={!description}>
-                {description}
-              </DialogDescription>
-            </DialogHeader>
-            {children}
-          </>
+          children
         )}
       </DialogContent>
     </Dialog>

@@ -6,7 +6,7 @@ import { Slogan } from "@/components/slogan";
 import { Separator } from "@/components/ui/separator";
 import { Information } from "./information";
 import { DesktopLayout } from "@/layouts/desktop-layout";
-import { EmailSubscribe } from "@/features/dashboard/subscribes/components/email-subscribe";
+import { EmailSubscribe } from "@/features/dashboard/marketing/subscribes/components/email-subscribe";
 
 export const Footer = () => {
   return (

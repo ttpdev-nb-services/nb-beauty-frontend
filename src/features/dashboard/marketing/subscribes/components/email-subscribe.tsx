@@ -1,7 +1,6 @@
 "use client";
 
 import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { TextField } from "@/components/react-hook-forms/fields/text-field";
 import { Loading } from "@/components/loading";
@@ -10,6 +9,7 @@ import { schemas, TEmailSubscribeSchema } from "@/modules/subscribe/schemas";
 import { AxiosError } from "axios";
 import { ApiValidationResponse } from "@/interfaces/api.interface";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { zodResolver } from "@hookform/resolvers/zod";
 export const EmailSubscribe = () => {
   const { mutate, isPending } = subscribeCommands.useEmailSubscribe();
 
@@ -28,15 +28,10 @@ export const EmailSubscribe = () => {
       },
       {
         onError: (error: AxiosError) => {
-          debugger;
-          console.log(error.response?.data);
-
           const errors = error.response?.data as ApiValidationResponse;
 
           if (typeof errors.errors === "object") {
-            debugger;
             Object.entries(errors.errors).forEach(([field, message]) => {
-              debugger;
               const safeMessage =
                 (typeof message === "string" ? message : "") || "";
               form.setError(field as keyof TEmailSubscribeSchema, {

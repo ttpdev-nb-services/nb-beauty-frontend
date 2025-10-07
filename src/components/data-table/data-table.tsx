@@ -19,8 +19,6 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Checkbox } from "../ui/checkbox";
-import { Fragment } from "react";
 
 export const DataTable = <TData, TValue>({
   columns,
@@ -69,19 +67,9 @@ export const DataTable = <TData, TValue>({
           <TableHeader className="bg-secondary">
             {table.getHeaderGroups().map((header) => (
               <TableRow className="rounded-lg border-none" key={header.id}>
-                {enableRowSelection && (
-                  <TableHead className="pl-4">
-                    <Checkbox
-                      checked={table.getIsAllPageRowsSelected()}
-                      onCheckedChange={(checked) => {
-                        table.toggleAllPageRowsSelected(checked as boolean);
-                      }}
-                    />
-                  </TableHead>
-                )}
                 {header.headers.map((head) => (
                   <TableHead
-                    className="py-3 pr-4 text-neutral-600"
+                    className="py-3 pl-4 text-center text-neutral-600"
                     key={head.id}
                   >
                     {flexRender(
@@ -96,36 +84,29 @@ export const DataTable = <TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <Fragment key={row.id}>
-                  <TableRow data-state={row.getIsSelected() && "selected"}>
-                    {enableRowSelection && (
-                      <TableCell className="pl-4 border-b">
-                        <Checkbox
-                          checked={row.getIsSelected()}
-                          onCheckedChange={row.getToggleSelectedHandler()}
-                        />
-                      </TableCell>
-                    )}
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell
-                        className="text-neutral-800 py-3.5 pr-4 border-b "
-                        style={{
-                          minWidth: cell.column.getSize(),
-                          textWrap: "nowrap",
-                          maxWidth: "550px",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
-                        key={cell.id}
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </Fragment>
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell
+                      className="text-neutral-800 text-center py-3.5 pl-4 border-b "
+                      style={{
+                        minWidth: cell.column.getSize(),
+                        textWrap: "nowrap",
+                        maxWidth: "550px",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                      key={cell.id}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
               ))
             ) : (
               <TableRow>

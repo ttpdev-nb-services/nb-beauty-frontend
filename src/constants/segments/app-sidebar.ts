@@ -2,6 +2,7 @@ import { SidebarItem } from "@/types/segments/app-sidebar";
 import {
   Boxes,
   CircleGauge,
+  Gift,
   HandHeart,
   HelpCircle,
   Search,
@@ -54,7 +55,7 @@ export const sidebarItems: SidebarItem = {
           url: "/dashboard/categories",
         },
         {
-          title: "Thương hiệu / Nhà sản xuất",
+          title: "Thương hiệu",
           url: "/dashboard/brands",
         },
       ],
@@ -92,6 +93,19 @@ export const sidebarItems: SidebarItem = {
       isDefaultOpen: false,
       isAvailable: false,
       items: [],
+    },
+    {
+      title: "Tin tức & Ưu đãi",
+      url: "#",
+      icon: Gift,
+      isDefaultOpen: true,
+      isAvailable: true,
+      items: [
+        {
+          title: "Đăng ký nhận tin",
+          url: "/dashboard/marketing/subscribes",
+        },
+      ],
     },
   ],
   navSecondary: [
