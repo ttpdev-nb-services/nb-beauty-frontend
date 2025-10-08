@@ -4,7 +4,7 @@ export const createDefaultValues = {
   name: "",
   slug: "",
   description: "",
-  isActive: false,
+  active: false,
   parentId: null,
 };
 
@@ -15,7 +15,7 @@ export const createCategorySchema = z.object({
     .max(150, "Tên danh mục quá dài"),
   slug: z.string().nullable(),
   description: z.string().max(255, "Mô tả quá dài").nullable(),
-  isActive: z.boolean(),
+  active: z.boolean(),
   parentId: z
     .number()
     .nullable()
@@ -30,7 +30,7 @@ export const updateCategorySchema = z.object({
     .max(150, "Tên danh mục quá dài"),
   slug: z.string().nullable(),
   description: z.string().max(255, "Mô tả quá dài").nullable(),
-  isActive: z.boolean(),
+  active: z.boolean(),
   parentId: z
     .number()
     .nullable()

@@ -1,5 +1,6 @@
 import { DashboardLayout } from "@/layouts/dashboard-layout";
 import "@/styles/globals.css";
+import "@/styles/dashboard.css";
 
 import { ChildrenProps } from "@/types/default-props";
 

@@ -29,6 +29,11 @@ export const DataTable = <TData, TValue>({
   rowSelection = {},
   showFilters,
   showViewOptions,
+  onPaginationChange,
+  pagination = {
+    pageIndex: 0,
+    pageSize: 10,
+  },
 }: TDataTableProps<TData, TValue>) => {
   const { handleVisibilityChange, columnVisibility } = useDataTable(tableId);
 
@@ -39,17 +44,20 @@ export const DataTable = <TData, TValue>({
       size: 200,
     },
     state: {
+      pagination,
       rowSelection,
       columnVisibility: columnVisibility[tableId] ?? {},
     },
+
     enableRowSelection,
+    onPaginationChange,
     onRowSelectionChange,
     getCoreRowModel: getCoreRowModel(),
     onColumnVisibilityChange: handleVisibilityChange,
   });
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 max-w-full">
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           {showFilters && <DataTableFilter table={table} />}
@@ -62,11 +70,11 @@ export const DataTable = <TData, TValue>({
         </div>
         {showViewOptions && <DataTableViewOptions table={table} />}
       </div>
-      <div className="overflow-x-auto rounded-md">
+      <div className="!max-w-full overflow-x-auto">
         <Table>
           <TableHeader className="bg-secondary">
             {table.getHeaderGroups().map((header) => (
-              <TableRow className="rounded-lg border-none" key={header.id}>
+              <TableRow className="border-none" key={header.id}>
                 {header.headers.map((head) => (
                   <TableHead
                     className="py-3 pl-4 text-center text-neutral-600"
@@ -90,11 +98,12 @@ export const DataTable = <TData, TValue>({
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
+                      title={String(cell.getValue())}
                       className="text-neutral-800 text-center py-3.5 pl-4 border-b "
                       style={{
-                        minWidth: cell.column.getSize(),
-                        textWrap: "nowrap",
-                        maxWidth: "550px",
+                        width: cell.column.getSize(),
+                        whiteSpace: "nowrap",
+                        maxWidth: 550,
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                       }}

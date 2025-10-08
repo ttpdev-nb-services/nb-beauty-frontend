@@ -5,8 +5,9 @@ import Link from "next/link";
 import { BASE_ROUTE } from "@/constants/route";
 import { Switch } from "@/components/ui/switch";
 import { FormatDateTime } from "@/utils/format";
+import { handleToggleActiveCategory } from "./commands";
 
-export const Columns: ColumnDef<TCategories, TCategories>[] = [
+export const columns: ColumnDef<TCategories, TCategories>[] = [
   {
     id: "name",
     accessorKey: "name",
@@ -59,12 +60,17 @@ export const Columns: ColumnDef<TCategories, TCategories>[] = [
     },
   },
   {
-    id: "isActive",
-    accessorKey: "isActive",
+    id: "active",
+    accessorKey: "active",
     header: "Trạng thái hiển thị",
     cell: ({ row }) => {
       const isActive = row.original.isActive;
-      return <Switch checked={isActive} />;
+      return (
+        <Switch
+          onCheckedChange={() => handleToggleActiveCategory(row.original.id)}
+          checked={isActive}
+        />
+      );
     },
   },
   {

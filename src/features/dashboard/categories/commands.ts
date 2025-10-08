@@ -8,7 +8,10 @@ import notificationService from "@/services/notification.service";
 import { categoryQueries } from "./queries";
 import queryClient from "@/configs/react-query.config";
 import { AxiosError } from "axios";
-import { ApiValidationResponse } from "@/interfaces/api.interface";
+import {
+  ApiErrorResponse,
+  ApiValidationResponse,
+} from "@/interfaces/api.interface";
 
 export const categoryCommands = {
   useCreateCategory: () => {
@@ -64,4 +67,38 @@ export const categoryCommands = {
       },
     });
   },
+  useToggleActiveCategory: () => {
+    return useMutation({
+      mutationFn: (id: number) => categoryServices.delete(id),
+      onError: (error: AxiosError) => {
+        const errors = error.response?.data as ApiValidationResponse;
+        notificationService.error(errors.message);
+      },
+      onSuccess(data) {
+        if (data) {
+          queryClient.invalidateQueries({
+            queryKey: categoryQueries.index(),
+          });
+          notificationService.success(data.message);
+        }
+      },
+    });
+  },
+};
+
+export const handleToggleActiveCategory = async (id: number) => {
+  try {
+    const res = await categoryServices.toggleActive(id);
+
+    if (res.success) {
+      queryClient.invalidateQueries({
+        ...categoryQueries.index,
+      });
+      notificationService.success(res.message);
+    }
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    const apiError = axiosError.response?.data as ApiErrorResponse;
+    notificationService.error(apiError.message);
+  }
 };

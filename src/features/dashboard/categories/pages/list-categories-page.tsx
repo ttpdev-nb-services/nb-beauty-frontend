@@ -1,7 +1,7 @@
 "use client";
 
 import { DataTable } from "@/components/data-table/data-table";
-import { Columns } from "../columns";
+import { columns } from "../columns";
 import { useQuery } from "@tanstack/react-query";
 import { categoryQueries } from "../queries";
 import { placeholderData } from "@/constants/react-query";
@@ -24,7 +24,7 @@ export const ListCategoriesPage = () => {
         onRowSelectionChange={setRowSelection}
         enableRowSelection
         tableId="categories"
-        columns={Columns}
+        columns={columns}
         showFilters
         showViewOptions
         data={categories?.results || placeholderData}

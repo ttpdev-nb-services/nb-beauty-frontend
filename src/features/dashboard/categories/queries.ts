@@ -10,7 +10,7 @@ export const categoryQueries = {
     }),
   getById: (id: number) =>
     queryOptions({
-      queryFn: () => categoryServices.detail(id),
       queryKey: [...categoryQueries.index(), id],
+      queryFn: () => categoryServices.view(id),
     }),
 };

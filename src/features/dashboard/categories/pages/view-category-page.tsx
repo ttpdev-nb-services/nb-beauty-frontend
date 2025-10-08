@@ -45,7 +45,7 @@ export const ViewCategoryPage = ({ id }: ViewCategoryPageProps) => {
         </div>
         <div>
           <Label>Trạng thái hiển thị</Label>
-          <span>{data?.data.isActive ? "Đang hoạt động" : "Tạm ẩn"}</span>
+          <span>{data?.data.active ? "Đang hoạt động" : "Tạm ẩn"}</span>
         </div>
       </div>
       <DialogFooter className="gap-4">

@@ -1,4 +1,3 @@
-import { BaseApi } from "@/constants/api";
 import { ApiResponse, CollectionResponse } from "@/interfaces/api.interface";
 import { TCategories, TCategory } from "./types/queries";
 import {
@@ -14,29 +13,34 @@ export class CategoryService {
   }
   public async list() {
     return this.httpService.get<CollectionResponse<TCategories>>(
-      BaseApi.categories.base,
+      "/api/v1/dashboard/categories",
     );
   }
   public async create(request: TCreateCategoryRequest) {
     return this.httpService.post<ApiResponse<TCategory>>(
-      BaseApi.categories.base,
+      "/api/v1/dashboard/categories",
       request,
     );
   }
   public async delete(id: number) {
     return this.httpService.delete<ApiResponse<TCategory>>(
-      `${BaseApi.categories.delete(id)}`,
+      `/api/v1/dashboard/categories/${id}`,
     );
   }
   public async update(id: number, request: TUpdateCategoryRequest) {
     return this.httpService.put<ApiResponse<TCategory>>(
-      `${BaseApi.categories.update(id)}`,
+      `/api/v1/dashboard/categories/${id}`,
       request,
     );
   }
-  public async detail(id: number) {
+  public async view(id: number) {
     return this.httpService.get<ApiResponse<TCategory>>(
-      `${BaseApi.categories.detail(id)}`,
+      `/api/v1/dashboard/categories/${id}`,
+    );
+  }
+  public async toggleActive(id: number) {
+    return this.httpService.patch<ApiResponse<TCategory>>(
+      `/api/v1/dashboard/categories/${id}/active`,
     );
   }
 }

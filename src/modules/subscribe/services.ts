@@ -1,4 +1,3 @@
-import { BaseApi } from "@/constants/api";
 import { IHttpService } from "@/interfaces/http";
 import { TEmailSubscribeRequest } from "./types/commands";
 import { ApiResponse, CollectionResponse } from "@/interfaces/api.interface";
@@ -12,19 +11,19 @@ export class SubscribeService {
 
   public async emailSubscribe(request: TEmailSubscribeRequest) {
     return this.httpService.post<ApiResponse<TSubscribeDto>>(
-      `${BaseApi.subscribe.email()}`,
+      "/api/v1/subscribes",
       request,
     );
   }
   public async cancelSubscripting(id: number) {
     return this.httpService.delete<ApiResponse<TSubscribeDto>>(
-      `${BaseApi.subscribe.dashboard.cancel(id)}`,
+      `/api/v1/dashboard/subscribes/${id}/cancel`,
     );
   }
 
   public async list() {
     return this.httpService.get<CollectionResponse<TSubscribeDto>>(
-      `${BaseApi.subscribe.dashboard.base}`,
+      `/api/v1/dashboard/subscribes`,
     );
   }
 }

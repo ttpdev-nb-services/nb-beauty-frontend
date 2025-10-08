@@ -37,6 +37,7 @@ export const CreateCategoryForm = () => {
 
   const handleSubmit = form.handleSubmit((values) => {
     console.log(values);
+
     mutate(values, {
       onSuccess: () => {
         handleNavigate(BASE_ROUTE.categories.base);
@@ -103,7 +104,7 @@ export const CreateCategoryForm = () => {
                 </FieldDescription>
               </Field>
               <Field>
-                <SwitchField name="isActive" label="Mô tả" />
+                <SwitchField name="active" label="Mô tả" />
                 <FieldDescription>Ẩn/hiện danh mục</FieldDescription>
               </Field>
             </FieldGroup>

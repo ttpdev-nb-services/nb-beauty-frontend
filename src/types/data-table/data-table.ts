@@ -1,4 +1,9 @@
-import { ColumnDef, Row, RowSelectionState } from "@tanstack/react-table";
+import {
+  ColumnDef,
+  PaginationState,
+  Row,
+  RowSelectionState,
+} from "@tanstack/react-table";
 
 export type TDataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -8,6 +13,8 @@ export type TDataTableProps<TData, TValue> = {
   rowSelection?: RowSelectionState;
   showFilters?: boolean;
   showViewOptions?: boolean;
+  pagination: PaginationState;
+  onPaginationChange: React.Dispatch<React.SetStateAction<PaginationState>>;
   onRowSelectionChange?: React.Dispatch<
     React.SetStateAction<RowSelectionState>
   >;
